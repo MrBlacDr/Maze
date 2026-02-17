@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>maze_solution module &mdash; документация Maze_python v1</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=32b6ac81"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=29b1f277"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="render_cave module" href="render_cave.html" />
+    <link rel="prev" title="maze_genv3 module" href="maze_genv3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Maze_python
+              <img src="_static/logo.jpg" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cave_gen.html">cave_gen module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convertions.html">convertions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">gui module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maze_genv3.html">maze_genv3 module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">maze_solution module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#maze_solution.add_path_to_image"><code class="docutils literal notranslate"><span class="pre">add_path_to_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maze_solution.find_path"><code class="docutils literal notranslate"><span class="pre">find_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maze_solution.make_solution"><code class="docutils literal notranslate"><span class="pre">make_solution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maze_solution.visual"><code class="docutils literal notranslate"><span class="pre">visual()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="render_cave.html">render_cave module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="render_maze.html">render_maze module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="q_learning.html">q_learning module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="q_solve.html">q_solve module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Maze_python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+      <li class="breadcrumb-item active">maze_solution module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/maze_solution.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="maze-solution-module">
+<h1>maze_solution module<a class="headerlink" href="#maze-solution-module" title="Link to this heading"></a></h1>
+<p>Решением лабиринта считается кратчайший путь от заданной начальной точки (ячейки таблицы) до конечной.
+При прохождении лабиринта можно передвигаться к соседним ячейкам, не отделенным «стеной» от текущей ячейки и находящимся сверху, снизу, справа или слева.
+Кратчайшим маршрут считается, если он проходит через наименьшее число ячеек.</p>
+<dl class="py function" id="module-maze_solution">
+<dt class="sig sig-object py" id="maze_solution.add_path_to_image">
+<span class="sig-prename descclassname"><span class="pre">maze_solution.</span></span><span class="sig-name descname"><span class="pre">add_path_to_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_to_read</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_to_save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/maze_solution.html#add_path_to_image"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#maze_solution.add_path_to_image" title="Link to this definition"></a></dt>
+<dd><p>Функция, рисующая путь поверх имеющейся картинки лабиринта.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_to_read</strong> – путь к картинке с лабиринтом для чтения</p></li>
+<li><p><strong>row</strong> – высота лабиринта</p></li>
+<li><p><strong>col</strong> – ширина лабиринта</p></li>
+<li><p><strong>line</strong> – список координат точек</p></li>
+<li><p><strong>image_to_save</strong> – путь к картинке с нарисованным маршрутом</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maze_solution.find_path">
+<span class="sig-prename descclassname"><span class="pre">maze_solution.</span></span><span class="sig-name descname"><span class="pre">find_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maze</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">not_found</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/maze_solution.html#find_path"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#maze_solution.find_path" title="Link to this definition"></a></dt>
+<dd><p>Рекурсивная функция поиска пути.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>maze</strong> – матрица лабиринта</p></li>
+<li><p><strong>start</strong> – координаты точки начала</p></li>
+<li><p><strong>end</strong> – координаты конечной точки</p></li>
+<li><p><strong>path</strong> – список координат, куда записывается маршрут</p></li>
+<li><p><strong>not_found</strong> – флаг, сигнализирующий о завершении поиска</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>кортеж из флага, что найден путь, и список координат самого пути</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maze_solution.make_solution">
+<span class="sig-prename descclassname"><span class="pre">maze_solution.</span></span><span class="sig-name descname"><span class="pre">make_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maze_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_read</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/maze_solution.html#make_solution"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#maze_solution.make_solution" title="Link to this definition"></a></dt>
+<dd><p>Основная функция поиска пути.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>maze_file</strong> – название файла, содержащего лабиринт</p></li>
+<li><p><strong>start</strong> – координаты точки начала</p></li>
+<li><p><strong>end</strong> – координаты конечной точки</p></li>
+<li><p><strong>img_read</strong> – название картинки для считывания лабиринта</p></li>
+<li><p><strong>img_out</strong> – название картинки для сохранения нарисованного маршрута</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="maze_solution.visual">
+<span class="sig-prename descclassname"><span class="pre">maze_solution.</span></span><span class="sig-name descname"><span class="pre">visual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/maze_solution.html#visual"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#maze_solution.visual" title="Link to this definition"></a></dt>
+<dd><p>Функция, использованная для отладки алгоритма. Не участвует в поиске решения.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> – файл, содержащий лабиринт</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="maze_genv3.html" class="btn btn-neutral float-left" title="maze_genv3 module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="render_cave.html" class="btn btn-neutral float-right" title="render_cave module" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, Mutteria Hermilac. </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

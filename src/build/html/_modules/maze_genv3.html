@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>maze_genv3 &mdash; документация Maze_python v1</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=32b6ac81"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=29b1f277"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
+    <link rel="search" title="Поиск" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Maze_python
+              <img src="../_static/logo.jpg" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Maze_python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Код модуля</a></li>
+      <li class="breadcrumb-item active">maze_genv3</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Исходный код maze_genv3</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
+
+
+<div class="viewcode-block" id="Place">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.Place">[документация]</a>
+<span class="k">class</span> <span class="nc">Place</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Представляет ячейку лабиринта с возможностью установки правой и нижней стены.</span>
+
+<span class="sd">    Атрибуты:</span>
+<span class="sd">        set (int): Уникальный индентификатор принадлежности к множеству.</span>
+
+<span class="sd">        right_wall (int): Толщина правой стены.</span>
+
+<span class="sd">        down_wall (int): Толщина нижней стены.</span>
+
+<span class="sd">    Методы:</span>
+<span class="sd">        __str__: Возвращает строковое представление объекта Place.</span>
+
+<span class="sd">        __repr__: Возвращает строковое представление объекта Place для отладки.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Инициализирует экземпляр класса Place.</span>
+
+<span class="sd">        Параметры:</span>
+<span class="sd">            set (int): Набор, идентифицирующий место.</span>
+
+<span class="sd">            r (int, optional): Толщина правой стены. По умолчанию равно 2.</span>
+
+<span class="sd">            d (int, optional): Толщина нижней стены. По умолчанию равно 2.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span> <span class="o">=</span> <span class="nb">set</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_wall</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_wall</span> <span class="o">=</span> <span class="n">d</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Функция сравнения 2 объектов Place</span>
+<span class="sd">        :param other: другой объект Place</span>
+<span class="sd">        :return: True или False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Place</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">set</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_wall</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">right_wall</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">down_wall</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">down_wall</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Функция сравнения 2 объектов Place (not equal)</span>
+<span class="sd">        :param other: другой объект Place</span>
+<span class="sd">        :return: True или False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Place</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">set</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_wall</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">right_wall</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">down_wall</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">down_wall</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Возвращает строковое представление объекта Place.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">right_wall</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">down_wall</span><span class="si">}</span><span class="s2">]&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Возвращает строковое представление объекта Place для отладки.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">,</span> <span class="s2">&quot;|&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_wall</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">По алгоритму описанному в статье:</span>
+<span class="sd">https://weblog.jamisbuck.org/2010/12/29/maze-generation-eller-s-algorithm</span>
+<span class="sd">делаем по шагам:</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">yes_no</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">_count</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># глобальная переменная, счетчик уникальных множеств</span>
+
+
+<div class="viewcode-block" id="maze_fill_empty_value">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.maze_fill_empty_value">[документация]</a>
+<span class="k">def</span> <span class="nf">maze_fill_empty_value</span><span class="p">(</span><span class="n">columns</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Заполнение строчки лабиринта пустыми занчениями</span>
+
+<span class="sd">    :param columns: ширина лабиринта</span>
+<span class="sd">    :return: список объектов Place</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="p">[</span><span class="n">Place</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">columns</span><span class="p">)]</span>  <span class="c1"># создаем пустые места</span>
+    <span class="k">return</span> <span class="n">line</span></div>
+
+
+
+<div class="viewcode-block" id="maze_assign_unique_set">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.maze_assign_unique_set">[документация]</a>
+<span class="k">def</span> <span class="nf">maze_assign_unique_set</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Присваиваем каждой ячейке свое уникальное множество (по факту просто уникальное число)</span>
+
+<span class="sd">    :param line: список объектов Place</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_count</span>
+    <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>  <span class="c1"># заполняем пустые места уникальными множествами</span>
+        <span class="k">if</span> <span class="n">elem</span><span class="o">.</span><span class="n">set</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">elem</span><span class="o">.</span><span class="n">set</span> <span class="o">=</span> <span class="n">_count</span>
+            <span class="n">_count</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+
+<div class="viewcode-block" id="maze_dropping_vertical_walls">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.maze_dropping_vertical_walls">[документация]</a>
+<span class="k">def</span> <span class="nf">maze_dropping_vertical_walls</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">hash</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Удаление вертикальных границ.</span>
+
+<span class="sd">    :param line: список объектов Place</span>
+<span class="sd">    :param hash: словарь: ключ - цифра множества, значение - список индексов ячеек, принадлежащих этому множеству</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># Решаем, убирать стенку или нет.</span>
+        <span class="c1"># Убираем стенку только между разными множествами и сливаем их.</span>
+        <span class="k">if</span> <span class="n">choice</span><span class="p">(</span><span class="n">yes_no</span><span class="p">)</span> <span class="ow">and</span> <span class="n">line</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span> <span class="o">!=</span> <span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">:</span>
+            <span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">right_wall</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">maze_merge_set</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="nb">hash</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="maze_hash_for_mutable_sets">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.maze_hash_for_mutable_sets">[документация]</a>
+<span class="k">def</span> <span class="nf">maze_hash_for_mutable_sets</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ячейки, принадлежащие одному множеству могут быть разбросаны по всей строке.</span>
+<span class="sd">    Данная функция помогает собрать индексы ячеек в список и хранить эти списки в ключах словаря</span>
+<span class="sd">    (ключ - уникальное число, принадлежащее кокнретному множеству).</span>
+
+<span class="sd">    :param line: список объектов Place</span>
+<span class="sd">    :return: словарь: ключ - цифра множества, значение - список индексов ячеек, принадлежащих этому множеству</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">d</span></div>
+
+
+
+<div class="viewcode-block" id="maze_merge_set">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.maze_merge_set">[документация]</a>
+<span class="k">def</span> <span class="nf">maze_merge_set</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">hash</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Объединение соседних ячеек в одно множество. Если с сливаемой ячейкой связаны другие, то и их значение меняем.</span>
+
+<span class="sd">    :param line: список объектов Place</span>
+<span class="sd">    :param hash: словарь: ключ - цифра множества, значение - список индексов ячеек, принадлежащих этому множеству</span>
+<span class="sd">    :param index: индекс ячейки, с которой сливаются все остальные</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">old_key</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span>
+    <span class="n">mutable_key</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">set</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">hash</span><span class="p">[</span><span class="n">old_key</span><span class="p">]:</span>
+        <span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span> <span class="o">=</span> <span class="n">mutable_key</span>
+        <span class="nb">hash</span><span class="p">[</span><span class="n">mutable_key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">del</span> <span class="nb">hash</span><span class="p">[</span><span class="n">old_key</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="maze_get_list_of_unique">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.maze_get_list_of_unique">[документация]</a>
+<span class="k">def</span> <span class="nf">maze_get_list_of_unique</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Получить список уникальных значений (по факту - список всех множеств)</span>
+
+<span class="sd">    :param line: список объектов Place</span>
+<span class="sd">    :return: список</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">elem</span><span class="o">.</span><span class="n">set</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">line</span><span class="p">]))</span></div>
+
+
+
+<div class="viewcode-block" id="maze_list_indices_for_choice">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.maze_list_indices_for_choice">[документация]</a>
+<span class="k">def</span> <span class="nf">maze_list_indices_for_choice</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">elem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Выбирает индексы ячеек, принадлежащих одному множеству.</span>
+
+<span class="sd">    :param line: список объектов Place</span>
+<span class="sd">    :param elem: опорный элемент, содержащий информацию о множестве</span>
+<span class="sd">    :return: список</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span> <span class="o">==</span> <span class="n">elem</span><span class="o">.</span><span class="n">set</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="maze_dropping_horizontal_walls">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.maze_dropping_horizontal_walls">[документация]</a>
+<span class="k">def</span> <span class="nf">maze_dropping_horizontal_walls</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Удаление хотя бы горизонтальной стенки в каждом множестве.</span>
+<span class="sd">    После этого происходит рандомное удаление горизонтальное стенки.</span>
+
+<span class="sd">    :param line: список объектов Place</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># создаем список уникальных множеств</span>
+    <span class="n">unique</span> <span class="o">=</span> <span class="n">maze_get_list_of_unique</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
+        <span class="c1"># обязательное удаление стенки для каждого из наборов множеств</span>
+        <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span> <span class="ow">in</span> <span class="n">unique</span><span class="p">:</span>
+            <span class="n">list_indices_for_choice</span> <span class="o">=</span> <span class="n">maze_list_indices_for_choice</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">unique</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">)</span>
+            <span class="n">line</span><span class="p">[</span><span class="n">choice</span><span class="p">(</span><span class="n">list_indices_for_choice</span><span class="p">)]</span><span class="o">.</span><span class="n">down_wall</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># случайное удаление</span>
+        <span class="k">if</span> <span class="n">choice</span><span class="p">(</span><span class="n">yes_no</span><span class="p">):</span>
+            <span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">down_wall</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+
+
+<div class="viewcode-block" id="maze_make_first_line">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.maze_make_first_line">[документация]</a>
+<span class="k">def</span> <span class="nf">maze_make_first_line</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Генерируем первую строчку лабиринта.</span>
+
+<span class="sd">    :param col: ширина лабиринта</span>
+<span class="sd">    :return: список ячеек</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_line</span> <span class="o">=</span> <span class="n">maze_fill_empty_value</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">maze_assign_unique_set</span><span class="p">(</span><span class="n">new_line</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">maze_hash_for_mutable_sets</span><span class="p">(</span><span class="n">new_line</span><span class="p">)</span>
+    <span class="n">maze_dropping_vertical_walls</span><span class="p">(</span><span class="n">new_line</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+    <span class="n">maze_dropping_horizontal_walls</span><span class="p">(</span><span class="n">new_line</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_line</span></div>
+
+
+
+<div class="viewcode-block" id="maze_make_other_line">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.maze_make_other_line">[документация]</a>
+<span class="k">def</span> <span class="nf">maze_make_other_line</span><span class="p">(</span><span class="n">col</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">prev</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Функция для генерации строк лабиринта, начиная со второй, заканчивая предпоследней.</span>
+
+<span class="sd">    :param col: ширина лабиринта</span>
+<span class="sd">    :param prev: предыдущая строка лабиринта</span>
+<span class="sd">    :return: список ячеек</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_line</span> <span class="o">=</span> <span class="n">maze_fill_empty_value</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prev</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">prev</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">down_wall</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span>
+    <span class="n">maze_assign_unique_set</span><span class="p">(</span><span class="n">new_line</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">maze_hash_for_mutable_sets</span><span class="p">(</span><span class="n">new_line</span><span class="p">)</span>
+    <span class="n">maze_dropping_vertical_walls</span><span class="p">(</span><span class="n">new_line</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+    <span class="n">maze_dropping_horizontal_walls</span><span class="p">(</span><span class="n">new_line</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_line</span></div>
+
+
+
+<div class="viewcode-block" id="maze_make_last_line">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.maze_make_last_line">[документация]</a>
+<span class="k">def</span> <span class="nf">maze_make_last_line</span><span class="p">(</span><span class="n">col</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">prev</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Функция для генерации последней строки лабиринта.</span>
+
+<span class="sd">    :param col: ширина лабиринта</span>
+<span class="sd">    :param prev: предыдущая строка лабиринта</span>
+<span class="sd">    :return: список ячеек</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_line</span> <span class="o">=</span> <span class="n">maze_fill_empty_value</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prev</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">prev</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">down_wall</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span>
+    <span class="n">maze_assign_unique_set</span><span class="p">(</span><span class="n">new_line</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">maze_hash_for_mutable_sets</span><span class="p">(</span><span class="n">new_line</span><span class="p">)</span>
+    <span class="c1"># убрать стенки между разными множествами и объединить множества</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prev</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">new_line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span> <span class="o">!=</span> <span class="n">new_line</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">:</span>
+            <span class="n">new_line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">right_wall</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">maze_merge_set</span><span class="p">(</span><span class="n">new_line</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_line</span></div>
+
+
+
+<div class="viewcode-block" id="make_maze">
+<a class="viewcode-back" href="../maze_genv3.html#maze_genv3.make_maze">[документация]</a>
+<span class="k">def</span> <span class="nf">make_maze</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Главная функция, генерируюшая весь лабиринт с заданными параметрами.</span>
+
+<span class="sd">    :param row: высота лабиринта.</span>
+<span class="sd">    :param col: ширина лабиринта.</span>
+<span class="sd">    :return: матрица с записанным лабиринтом</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">maze_make_first_line</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="n">row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">maze_make_last_line</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">matrix</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">maze_make_other_line</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">matrix</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">matrix</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, Mutteria Hermilac. </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

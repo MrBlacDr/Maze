@@ -1,0 +1,5 @@
+tk
+pillow
+sphinx
+sphinx-rtd-theme
+pyinstaller

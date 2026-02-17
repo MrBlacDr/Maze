@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cave_gen module &mdash; документация Maze_python v1</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=32b6ac81"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=29b1f277"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="convertions module" href="convertions.html" />
+    <link rel="prev" title="src" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Maze_python
+              <img src="_static/logo.jpg" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cave_gen module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Генерация с использованием клеточного автомата</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cave_gen.check_boards"><code class="docutils literal notranslate"><span class="pre">check_boards()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cave_gen.create_cave"><code class="docutils literal notranslate"><span class="pre">create_cave()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cave_gen.generate_cave"><code class="docutils literal notranslate"><span class="pre">generate_cave()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cave_gen.load_cave"><code class="docutils literal notranslate"><span class="pre">load_cave()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cave_gen.make_cave"><code class="docutils literal notranslate"><span class="pre">make_cave()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cave_gen.make_iteration"><code class="docutils literal notranslate"><span class="pre">make_iteration()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cave_gen.save_cave"><code class="docutils literal notranslate"><span class="pre">save_cave()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="convertions.html">convertions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">gui module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maze_genv3.html">maze_genv3 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maze_solution.html">maze_solution module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="render_cave.html">render_cave module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="render_maze.html">render_maze module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="q_learning.html">q_learning module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="q_solve.html">q_solve module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Maze_python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+      <li class="breadcrumb-item active">cave_gen module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cave_gen.rst.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cave-gen-module">
+<h1>cave_gen module<a class="headerlink" href="#cave-gen-module" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>Генерация с использованием клеточного автомата<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>Во многих играх есть необходимость в ветвящихся локациях, например пещерах.
+Такие локации могут быть созданы генерацией с использованием клеточного автомата.
+При подобной генерации используется идея, схожая с уже знакомой тебе игрой «Жизнь».
+Суть предложенного алгоритма состоит в реализации всего двух шагов:
+сначала все поле заполняется случайным образом стенами — т.е. для каждой клетки случайным образом определяется,
+будет ли она свободной или непроходимой — а затем несколько раз происходит обновление состояния карты в соответствии с условиями, похожими на условия рождения/смерти в «Жизни».
+Правила проще, чем в «Жизни» - есть две специальные переменные, одна для «рождения» «мертвых» клеток (предел «рождения») и одна для уничтожения «живых» клеток (предел «смерти»).
+Если «живые» клетки окружены «живыми» клетками, количество которых меньше, чем предел «смерти», они «умирают».
+Аналогично если «мертвые» клетки находятся рядом с «живыми», количество которых больше, чем предел «рождения», они становятся «живыми».</p>
+<dl class="py function" id="module-cave_gen">
+<dt class="sig sig-object py" id="cave_gen.check_boards">
+<span class="sig-prename descclassname"><span class="pre">cave_gen.</span></span><span class="sig-name descname"><span class="pre">check_boards</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/cave_gen.html#check_boards"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#cave_gen.check_boards" title="Link to this definition"></a></dt>
+<dd><p>Проверка клеток, которые на границы области, подсчет мертвых клеток вокруг них.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> – индекс ячейки по глубине</p></li>
+<li><p><strong>j</strong> – индекс ячецки по ширине</p></li>
+<li><p><strong>matrix</strong> – поле пещеры</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>количество мертвых клеток вокруг</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cave_gen.create_cave">
+<span class="sig-prename descclassname"><span class="pre">cave_gen.</span></span><span class="sig-name descname"><span class="pre">create_cave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lim_b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lim_d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/cave_gen.html#create_cave"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#cave_gen.create_cave" title="Link to this definition"></a></dt>
+<dd><p>Создание пещеры, прошедшей заданное число итераций (обновлений).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrix</strong> – входное поле пещеры</p></li>
+<li><p><strong>lim_b</strong> – предел рождения</p></li>
+<li><p><strong>lim_d</strong> – предел смерти</p></li>
+<li><p><strong>iterations</strong> – заданное количество итераций</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>обновленное поле пещеры</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cave_gen.generate_cave">
+<span class="sig-prename descclassname"><span class="pre">cave_gen.</span></span><span class="sig-name descname"><span class="pre">generate_cave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/cave_gen.html#generate_cave"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#cave_gen.generate_cave" title="Link to this definition"></a></dt>
+<dd><p>Генерация стартовой пещеры. Рандомное заполенение 0 - живая клетка (белая), 1 - мертвая (черная).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – глубина</p></li>
+<li><p><strong>y</strong> – ширина</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>поле пещеры</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cave_gen.load_cave">
+<span class="sig-prename descclassname"><span class="pre">cave_gen.</span></span><span class="sig-name descname"><span class="pre">load_cave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/cave_gen.html#load_cave"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#cave_gen.load_cave" title="Link to this definition"></a></dt>
+<dd><p>Загрузка пещеры из файла</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> – имя файла или полный путь до него</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>размеры и поле пещеры</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cave_gen.make_cave">
+<span class="sig-prename descclassname"><span class="pre">cave_gen.</span></span><span class="sig-name descname"><span class="pre">make_cave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lim_b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lim_d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/cave_gen.html#make_cave"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#cave_gen.make_cave" title="Link to this definition"></a></dt>
+<dd><p>Тестовая функция, создает пещеру сразу после 20 итераций.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lim_b</strong> – предел рождения</p></li>
+<li><p><strong>lim_d</strong> – предел смерти</p></li>
+<li><p><strong>rows</strong> – глубина</p></li>
+<li><p><strong>cols</strong> – ширина</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>поле пещеры</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cave_gen.make_iteration">
+<span class="sig-prename descclassname"><span class="pre">cave_gen.</span></span><span class="sig-name descname"><span class="pre">make_iteration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lim_b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lim_d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/cave_gen.html#make_iteration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#cave_gen.make_iteration" title="Link to this definition"></a></dt>
+<dd><p>Итерация клеточного автомата.
+Функция переписывает пещеру в соответсвии с заданными правилами и пределами жизни и смерти.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrix</strong> – входное поле пещеры</p></li>
+<li><p><strong>lim_b</strong> – предел рождения</p></li>
+<li><p><strong>lim_d</strong> – предел смерти</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>обновленное поле пещеры</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cave_gen.save_cave">
+<span class="sig-prename descclassname"><span class="pre">cave_gen.</span></span><span class="sig-name descname"><span class="pre">save_cave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cave_matrix</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/cave_gen.html#save_cave"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#cave_gen.save_cave" title="Link to this definition"></a></dt>
+<dd><p>Сохранение пещеры в файл</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – имя файла или полный путь до него</p></li>
+<li><p><strong>cave_matrix</strong> – поле пещеры</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="modules.html" class="btn btn-neutral float-left" title="src" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="convertions.html" class="btn btn-neutral float-right" title="convertions module" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, Mutteria Hermilac. </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>maze_solution &mdash; документация Maze_python v1</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=32b6ac81"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=29b1f277"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
+    <link rel="search" title="Поиск" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Maze_python
+              <img src="../_static/logo.jpg" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Maze_python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Код модуля</a></li>
+      <li class="breadcrumb-item active">maze_solution</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Исходный код maze_solution</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">render_maze</span> <span class="kn">import</span> <span class="n">gen_img_maze</span>
+<span class="kn">from</span> <span class="nn">convertions</span> <span class="kn">import</span> <span class="n">convert_from_file</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
+
+
+<div class="viewcode-block" id="add_path_to_image">
+<a class="viewcode-back" href="../maze_solution.html#maze_solution.add_path_to_image">[документация]</a>
+<span class="k">def</span> <span class="nf">add_path_to_image</span><span class="p">(</span><span class="n">image_to_read</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">col</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">image_to_save</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Функция, рисующая путь поверх имеющейся картинки лабиринта.</span>
+
+<span class="sd">    :param image_to_read: путь к картинке с лабиринтом для чтения</span>
+<span class="sd">    :param row: высота лабиринта</span>
+<span class="sd">    :param col: ширина лабиринта</span>
+<span class="sd">    :param line: список координат точек</span>
+<span class="sd">    :param image_to_save: путь к картинке с нарисованным маршрутом</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">shift_x</span> <span class="o">=</span> <span class="mi">500</span> <span class="o">//</span> <span class="n">col</span>
+    <span class="n">shift_y</span> <span class="o">=</span> <span class="mi">500</span> <span class="o">//</span> <span class="n">row</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_to_read</span><span class="p">)</span>
+    <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">([</span><span class="n">part</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">shift_y</span> <span class="o">+</span> <span class="n">shift_y</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                   <span class="n">part</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">shift_x</span> <span class="o">+</span> <span class="n">shift_x</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                   <span class="n">part</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">shift_y</span> <span class="o">+</span> <span class="n">shift_y</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                   <span class="n">part</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">shift_x</span> <span class="o">+</span> <span class="n">shift_x</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="p">],</span>
+                  <span class="n">fill</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">image_to_save</span><span class="p">)</span></div>
+
+    <span class="c1"># image.save(&#39;./image/modified_maze.png&#39;)</span>
+    <span class="c1"># image.show()</span>
+
+
+<div class="viewcode-block" id="visual">
+<a class="viewcode-back" href="../maze_solution.html#maze_solution.visual">[документация]</a>
+<span class="k">def</span> <span class="nf">visual</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Функция, использованная для отладки алгоритма. Не участвует в поиске решения.</span>
+
+<span class="sd">    :param filename: файл, содержащий лабиринт</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">matrix</span> <span class="o">=</span> <span class="n">convert_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">gen_img_maze</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">matrix</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;image/maze.png&quot;</span><span class="p">)</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">flag</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">find_path</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[[</span><span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+    <span class="n">add_path_to_image</span><span class="p">(</span><span class="s2">&quot;image/maze.png&quot;</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="s1">&#39;./image/modified_maze.png&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="find_path">
+<a class="viewcode-back" href="../maze_solution.html#maze_solution.find_path">[документация]</a>
+<span class="k">def</span> <span class="nf">find_path</span><span class="p">(</span><span class="n">maze</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">not_found</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Рекурсивная функция поиска пути.</span>
+
+<span class="sd">    :param maze: матрица лабиринта</span>
+<span class="sd">    :param start: координаты точки начала</span>
+<span class="sd">    :param end: координаты конечной точки</span>
+<span class="sd">    :param path: список координат, куда записывается маршрут</span>
+<span class="sd">    :param not_found: флаг, сигнализирующий о завершении поиска</span>
+<span class="sd">    :return: кортеж из флага, что найден путь, и список координат самого пути</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">start</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>
+        <span class="n">not_found</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">not_found</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="p">[</span><span class="n">end</span><span class="p">]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">start</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># можно идти налево</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">maze</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">right_wall</span><span class="p">:</span>
+        <span class="n">coord</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="n">coord</span> <span class="ow">and</span> <span class="n">not_found</span><span class="p">:</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+            <span class="n">not_found</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">find_path</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">not_found</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">not_found</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">not_found</span><span class="p">,</span> <span class="n">path</span>
+    <span class="c1"># можно идти вверх</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">maze</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">down_wall</span><span class="p">:</span>
+        <span class="n">coord</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="n">coord</span> <span class="ow">and</span> <span class="n">not_found</span><span class="p">:</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+            <span class="n">not_found</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">find_path</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">not_found</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">not_found</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">not_found</span><span class="p">,</span> <span class="n">path</span>
+    <span class="c1"># можно идти направо</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">maze</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">maze</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">right_wall</span><span class="p">:</span>
+        <span class="n">coord</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="n">coord</span> <span class="ow">and</span> <span class="n">not_found</span><span class="p">:</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+            <span class="n">not_found</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">find_path</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">not_found</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">not_found</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">not_found</span><span class="p">,</span> <span class="n">path</span>
+    <span class="c1"># можно идти вниз</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">maze</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">maze</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">down_wall</span><span class="p">:</span>
+        <span class="n">coord</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="n">coord</span> <span class="ow">and</span> <span class="n">not_found</span><span class="p">:</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+            <span class="n">not_found</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">find_path</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">not_found</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">not_found</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">not_found</span><span class="p">,</span> <span class="n">path</span>
+    <span class="c1"># зачистка ложных тупиковых маршрутов</span>
+    <span class="k">if</span> <span class="n">not_found</span><span class="p">:</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">not_found</span><span class="p">,</span> <span class="n">path</span></div>
+
+
+
+<div class="viewcode-block" id="make_solution">
+<a class="viewcode-back" href="../maze_solution.html#maze_solution.make_solution">[документация]</a>
+<span class="k">def</span> <span class="nf">make_solution</span><span class="p">(</span><span class="n">maze_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">img_read</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">img_out</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Основная функция поиска пути.</span>
+
+<span class="sd">    :param maze_file: название файла, содержащего лабиринт</span>
+<span class="sd">    :param start: координаты точки начала</span>
+<span class="sd">    :param end: координаты конечной точки</span>
+<span class="sd">    :param img_read: название картинки для считывания лабиринта</span>
+<span class="sd">    :param img_out: название картинки для сохранения нарисованного маршрута</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">maze</span> <span class="o">=</span> <span class="n">convert_from_file</span><span class="p">(</span><span class="n">maze_file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">start</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">h</span> <span class="ow">or</span> <span class="n">start</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">w</span> <span class="ow">or</span> <span class="n">end</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">h</span> <span class="ow">or</span> <span class="n">end</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">w</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Точки вне лабиринта&#39;</span><span class="p">)</span>
+    <span class="n">flag</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">find_path</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="n">start</span><span class="p">])</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[[</span><span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="c1"># print(flag)</span>
+    <span class="n">add_path_to_image</span><span class="p">(</span><span class="n">img_read</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">img_out</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">visual</span><span class="p">(</span><span class="s2">&quot;./mazes/maze5.txt&quot;</span><span class="p">)</span>
+    <span class="c1"># image = Image.open(&quot;image/maze.png&quot;)</span>
+    <span class="c1"># image.show()</span>
+    <span class="c1"># add_path_to_image(&quot;image/maze.png&quot;)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2024, Mutteria Hermilac. </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
